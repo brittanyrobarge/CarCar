@@ -1,54 +1,63 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from 'react';
+
 
 function AutomobilesList() {
-const [list, setList] = useState([]);
+  const [automobiles, setAutomobiles] = useState([])
 
-const fetchAutoData = async () => {
-    const url = 'http://localhost:8100/api/automobiles/';
-    const response = await fetch(url);
+  const getData = async () => {
+    const response = await fetch('http://localhost:8100/api/automobiles/');
+
     if (response.ok) {
-        const data = await response.json();
-        setList(data.autos)
+      const data = await response.json();
+      setAutomobiles(data.autos)
     }
-}
+  }
 
-useEffect(() => {
-    fetchAutoData()
-}, []);
+  function setSold (bool) {
+    if (bool){
+        return "Yes"
+    } else {
+        return "No"
+    }
+  }
 
-return (
-    <div>
-        <>
-        <h1>Automobiles</h1>
-        </>
-        <table className="table table-striped">
-            <thead>
-                <tr className="table-success">
-                    <th>VIN</th>
-                    <th>Color</th>
-                    <th>Year</th>
-                    <th>Model</th>
-                    <th>Manufacturer</th>
-                    <th>Sold</th>
-                </tr>
-            </thead>
-            <tbody>
-                {list?.map(auto => {
-                    return (
-                        <tr key={auto.id} value={auto.id}>
-                            <td>{auto.vin}</td>
-                            <td>{auto.color}</td>
-                            <td>{auto.year}</td>
-                            <td>{auto.model.name}</td>
-                            <td>{auto.model.manufacturer.name}</td>
-                            <td><input type="checkbox" checked={auto.sold} /></td>
-                        </tr>
-                    )
-                })}
-            </tbody>
-        </table>
-    </div>
-)
+  useEffect(()=>{
+    getData()
+  }, [])
+
+
+  return (
+    <>
+    <h1>Automobiles</h1>
+    <table className="table table-striped">
+      <thead>
+        <tr>
+            <th>Vin</th>
+            <th>Color</th>
+            <th>Year</th>
+            <th>Model</th>
+            <th>Manufacturer</th>
+            <th>Sold</th>
+        </tr>
+      </thead>
+      <tbody>
+        {automobiles.map(automobile => {
+          return (
+            <tr key={automobile.id}>
+                <td>{ automobile.vin }</td>
+                <td>{ automobile.color }</td>
+                <td>{ automobile.year }</td>
+                <td>{ automobile.model.name}</td>
+                <td>{ automobile.model.manufacturer.name}</td>
+                <td>{ setSold(automobile.sold) }</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+    </>
+  );
 }
 
 export default AutomobilesList;
+

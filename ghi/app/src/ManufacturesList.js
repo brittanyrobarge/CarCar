@@ -1,43 +1,50 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function ManufacturersList() {
-    const [list, setList] = useState([]);
+  const [manufacturers, setManufacturers] = useState([])
 
-    async function loadManufacturers() {
-        const response = await fetch('http://localhost:8100/api/manufacturers/');
-        if (response.ok) {
-          const data = await response.json();
-          setList(data.manufacturers)
-        } else {
-          console.error(response);
-        }
-      }
+  const getData = async () => {
+    const response = await fetch('http://localhost:8100/api/manufacturers/');
 
-        useEffect(() => {
-        loadManufacturers();
-      }, []);
+    if (response.ok) {
+      const data = await response.json();
+      setManufacturers(data.manufacturers)
+    }
+  }
 
-        return (
-        <>
-            <h1>Manufacturers</h1>
-            <table className="table table-striped">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                </tr>
-              </thead>
-              <tbody>
-                {list?.map(manufacturers => {
-                  return (
-                    <tr key={manufacturers.id}>
-                      <td>{ manufacturers.name }</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-        </>
+  useEffect(()=>{
+    getData()
+  }, [])
+
+
+  return (
+    <>
+    <h1>Manufacturers</h1>
+    <table className="table table-striped">
+      <thead>
+        <tr>
+            <th>Model Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        {manufacturers.map(manufacturer => {
+          return (
+            <tr key={manufacturer.id}>
+                <td>{ manufacturer.name }</td>
+            </tr>
           );
-        }
+        })}
+      </tbody>
+    </table>
+    <div>
+      <Link to="/manufacturers/create/">
+        <button className="btn btn-primary btn-lg">Add a manufacturer</button>
+      </Link>
+    </div>
+    </>
+  );
+}
 
 export default ManufacturersList;
+

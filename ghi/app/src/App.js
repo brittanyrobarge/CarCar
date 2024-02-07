@@ -8,9 +8,11 @@ import ListSalesPeople from './ListSalesPeople';
 import ListAllSales from './ListAllSales';
 import ListCustomers from './ListCustomers';
 import SalesPersonForm from './SalesPersonForm';
-import ManufacturersList from './ManufacturesList';
+// import ManufacturersList from './ManufacturesList';
 // import ManufacturerForm from './CreateManufacturerForm';
 // import VehicleModelForm from './CreateVehicleModelForm';
+import AutomobilesList from './AutomobileList';
+import AutomobileForm from './AutomobileForm';
 import ModelsList from './ModelList';
 import TechnicianForm from './AddTechnicianForm';
 
@@ -31,6 +33,10 @@ function App() {
           {/* <Route path="manufacturers/create/" element={<ManufacturerForm />} /> */}
           <Route path="models/list/" element={<ModelsList />}/>
           <Route path="technicians/create/" element={<TechnicianForm />} />
+          <Route path="automobiles">
+            <Route path="" element={<AutomobilesList />} />
+            <Route path="create" element={<AutomobileForm/>} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>
