@@ -46,7 +46,7 @@ function AutomobileForm() {
         color: '',
         year: '',
         vin: '',
-        model: '',
+        model_id: '',
       });
     }
   }
@@ -55,7 +55,7 @@ function AutomobileForm() {
     let value = e.target.value;
     const inputName = e.target.name;
     if (inputName === 'model_id' && value !== '') {
-        value = parseInt(value, 10); // Convert to integer (assuming base 10)
+        value = parseInt(value, 10);
       }
 
 

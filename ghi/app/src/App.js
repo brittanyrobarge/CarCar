@@ -10,10 +10,10 @@ import ListCustomers from './ListCustomers';
 import SalesPersonForm from './SalesPersonForm';
 // import ManufacturersList from './ManufacturesList';
 // import ManufacturerForm from './CreateManufacturerForm';
-// import VehicleModelForm from './CreateVehicleModelForm';
+import VehicleModelForm from './CreateVehicleModelForm';
 import AutomobilesList from './AutomobileList';
 import AutomobileForm from './AutomobileForm';
-import ModelsList from './ModelList';
+import ModelsList from './ModelsList';
 import TechnicianForm from './AddTechnicianForm';
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
           <Route path="sales/" element={<RecordSaleForm />} />
           <Route path= "salespeople/" element={<SalesPersonForm />} />
           <Route path="sales/history/" element={<ListAllSales />} />
-          {/* <Route path="models/create/" element={<VehicleModelForm />} /> */}
+          <Route path="models/create/" element={<VehicleModelForm />} />
           {/* <Route path="manufacturers/create/" element={<ManufacturerForm />} /> */}
           <Route path="models/list/" element={<ModelsList />}/>
           <Route path="technicians/create/" element={<TechnicianForm />} />
