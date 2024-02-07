@@ -31,14 +31,21 @@ class Status(models.Model):
         ordering = ("name",)
 
 class Appointment(models.Model):
+    @classmethod
+    def create(cls, **kwargs):
+        kwargs["status"] = Status.objects.get(name="CREATED")
+        appointment = cls(**kwargs)
+        appointment.save()
+        return appointment
+
     date_time = models.DateTimeField()
     reason = models.TextField()
     status = models.CharField(max_length=50)
-    vin = models.CharField(max_length=20)
+    vin = models.CharField(max_length=20, unique=True)
     customer = models.CharField(max_length=255)
     technician = models.ForeignKey(
         Technician,
-        related_name="technician",
+        related_name="appointments",
         on_delete=models.CASCADE,
     )
 
@@ -64,4 +71,5 @@ class Appointment(models.Model):
     def __str__(self):
         return f"Appointment for {self.customer} on {self.date_time} - {self.status}"
 
-
+    class Meta:
+        ordering = ("customer", 'date_time')
