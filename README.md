@@ -2,10 +2,8 @@
 
 Team:
 
-
 * Brittany Welborn - Automobile Service
 * Brittany Robarge - Automobile Sales
-
 
 ## Design
 

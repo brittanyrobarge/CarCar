@@ -115,5 +115,4 @@ function AppointmentForm() {
             </div>
         );
     }
-
 export default AppointmentForm;
