@@ -1,48 +1,54 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function ModelsList() {
-const [list, setList] = useState([]);
+  const [models, setModels] = useState([])
 
-const fetchModelData = async () => {
-    const url = 'http://localhost:8100/api/models/';
-    const response = await fetch(url);
+  const getData = async () => {
+    const response = await fetch('http://localhost:8100/api/models/');
+
     if (response.ok) {
-        const data = await response.json();
-        setList(data.models)
+      const data = await response.json();
+      setModels(data.models)
     }
-}
+  }
 
-useEffect(() => {
-    fetchModelData()
-}, []);
+  useEffect(()=>{
+    getData()
+  }, [])
 
-return (
+
+  return (
+    <>
+    <h1>Models</h1>
+    <table className="table table-striped">
+      <thead>
+        <tr>
+            <th>Name</th>
+            <th>Manufacturer</th>
+            <th>Picture</th>
+        </tr>
+      </thead>
+      <tbody>
+        {models.map(model => {
+          return (
+            <tr key={model.id}>
+                <td>{ model.name }</td>
+                <td>{ model.manufacturer.name }</td>
+                <td><img src={model.picture_url} alt={model.name} style={{ width: '100px', height: 'auto' }} /></td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
     <div>
-        <>
-        <h1>Models</h1>
-        </>
-        <table className="table table-striped">
-            <thead>
-                <tr className="table-success">
-                    <th>Name</th>
-                    <th>Manufacturer</th>
-                    <th>Picture</th>
-                </tr>
-            </thead>
-            <tbody>
-                {list?.map(model => {
-                    return (
-                        <tr key={model.id} value={model.id}>
-                            <td>{model.name}</td>
-                            <td>{model.manufacturer.name}</td>
-                            <td><img src={model.picture_url} alt={model.name}/></td>
-                        </tr>
-                    )
-                })}
-            </tbody>
-        </table>
+      <Link to="/models/create/">
+        <button className="btn btn-primary btn-lg">Add a model</button>
+      </Link>
     </div>
-)
+    </>
+  );
 }
 
 export default ModelsList;
+

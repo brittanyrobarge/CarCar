@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
+
 const initialData = {
   name: '',
   picture_url: '',
   manufacturer_id: '',
 };
 
-
 function ModelsForm() {
   const [manufacturers, setManufacturers] = useState([]);
   const [formData, setFormData] = useState(initialData);
+
 
 
   const fetchData = async () => {
@@ -23,7 +24,6 @@ function ModelsForm() {
     }
   };
 
-
   useEffect(() => {
     fetchData();
   }, []);
@@ -34,7 +34,6 @@ function ModelsForm() {
 
     const modelsUrl = 'http://localhost:8100/api/models/';
 
-
     const fetchConfig = {
       method: "post",
       body: JSON.stringify(formData),
@@ -44,6 +43,7 @@ function ModelsForm() {
     };
 
     const response = await fetch(modelsUrl, fetchConfig);
+    console.log(formData)
 
     if (response.ok) {
         setFormData(initialData);
@@ -55,7 +55,7 @@ function ModelsForm() {
     let value = e.target.value;
     const inputName = e.target.name;
     if (inputName === 'manufacturer_id' && value !== '') {
-        value = parseInt(value, 10);
+        value = parseInt(value, 10); // Convert to integer (assuming base 10)
       }
 
     setFormData({
@@ -103,3 +103,4 @@ function ModelsForm() {
 }
 
 export default ModelsForm;
+
