@@ -31,8 +31,6 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
-
-
           <Route path="salespeople">
             <Route path="" element={<SalesPeopleList />} />
             <Route path="create" element={<SalesPersonForm />} />
