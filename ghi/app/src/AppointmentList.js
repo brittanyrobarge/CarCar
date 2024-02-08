@@ -4,6 +4,7 @@ function AppointmentList(props) {
     const [appointments, setAppointments] = useState([]);
     const [automobiles, setAutomobiles] = useState([]);
 
+
     async function loadAppointments() {
         const response = await fetch('http://localhost:8080/api/appointments/');
         if (response.ok) {
@@ -17,6 +18,7 @@ function AppointmentList(props) {
         loadAppointments();
     }, []);
 
+
     async function loadAutomobiles() {
         const response = await fetch('http://localhost:8100/api/automobiles');
         if (response.ok) {
@@ -25,6 +27,16 @@ function AppointmentList(props) {
         } else {
             console.error(response);
         }
+    }
+
+    function Cancel(appointmentId) {
+        // Implement cancel logic, e.g., make a DELETE request to cancel the appointment
+        console.log(`Cancel appointment with ID: ${appointmentId}`);
+    }
+
+    function Finish(appointmentId) {
+        // Implement finish logic, e.g., make a POST request to mark the appointment as finished
+        console.log(`Finish appointment with ID: ${appointmentId}`);
     }
 
     useEffect(() => {
@@ -45,6 +57,7 @@ function AppointmentList(props) {
             </thead>
             <tbody>
                 {appointments?.map(appointment => {
+                    console.log(appointment);
                     return (
                         <tr key={appointment.vin}>
                             <td>{ appointment.vin }</td>
@@ -55,8 +68,8 @@ function AppointmentList(props) {
                             <td>{ appointment.reason }</td>
                             <td>
                                 <div>
-                                    <button type="button" className="btn btn-danger">Cancel</button>{' '}
-                                    <button type="button" className="btn btn-success">Finish</button>{' '}
+                                    <button type="button" className="btn btn-danger" onClick={() => Cancel(appointment.id)}>Cancel</button>{' '}
+                                    <button type="button" className="btn btn-success" onClick={() => Finish(appointment.id)}>Finish</button>{' '}
                                 </div>
                             </td>
                         </tr>
@@ -65,6 +78,7 @@ function AppointmentList(props) {
             </tbody>
         </table>
     );
+
 }
 
 export default AppointmentList;
