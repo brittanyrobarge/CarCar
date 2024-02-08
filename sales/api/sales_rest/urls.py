@@ -12,7 +12,7 @@ from .views import (
 
 
 urlpatterns = [
-    path("automobiles/", api_list_automobile_vo, name="api_list_automobile_vo"),
+    path("api/automobiles/", api_list_automobile_vo, name="api_list_automobile_vo"),
     path("salespeople/", api_salespeople, name="api_salespeople"),
     path("salespeople/<int:id>/", api_salesperson, name="api_salesperson"),
     path("customers/", api_customers, name="api_customers"),
