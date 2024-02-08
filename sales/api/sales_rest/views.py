@@ -124,7 +124,7 @@ def api_record_of_sales(request):
             )
         try:
             salesperson_id = content["salesperson"]
-            salesperson = salesperson.objects.get(id=salesperson_id)
+            salesperson = SalesPerson.objects.get(id=salesperson_id)
             content["salesperson"] = salesperson
         except salesperson.DoesNotExist:
             return JsonResponse(
