@@ -29,5 +29,5 @@ class Customer(models.Model):
 class RecordOfSale(models.Model):
     price = models.PositiveIntegerField()
     automobile = models.ForeignKey("AutomobileVO", related_name="automobile", on_delete=models.CASCADE)
-    sales_person = models.ForeignKey("SalesPerson", related_name="sales_person", on_delete=models.PROTECT)
+    salesperson = models.ForeignKey("SalesPerson", related_name="salesperson", on_delete=models.PROTECT)
     customer = models.ForeignKey("Customer", related_name="customer", on_delete=models.PROTECT)

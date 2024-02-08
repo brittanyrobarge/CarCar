@@ -55,7 +55,7 @@ function ModelsForm() {
     let value = e.target.value;
     const inputName = e.target.name;
     if (inputName === 'manufacturer_id' && value !== '') {
-        value = parseInt(value, 10); // Convert to integer (assuming base 10)
+        value = parseInt(value, 10);
       }
 
     setFormData({
@@ -103,4 +103,3 @@ function ModelsForm() {
 }
 
 export default ModelsForm;
-
