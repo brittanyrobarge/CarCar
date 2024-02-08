@@ -1,6 +1,6 @@
 from common.json import ModelEncoder
 
-from .models import AutomobileVO, Technician, Appointment
+from .models import AutomobileVO, Technician, Appointment, Status
 
 
 
@@ -36,4 +36,7 @@ class AppointmentEncoder(ModelEncoder):
     }
 
     def get_extra_data(self, o):
-        return {"status": o.status.name}
+        if isinstance(o.status, Status):
+            return {"status": o.status.name}
+        else:
+            return{"status": None}

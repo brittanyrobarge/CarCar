@@ -25,13 +25,13 @@ def api_list_automobile_vo(request):
 @require_http_methods(["GET", "POST"])
 def api_technician(request):
     if request.method == "GET":
-        technician = Technician.objects.all()
+        technicians = Technician.objects.all()
 
         return JsonResponse(
-            {"technicians": technician},
+            {"technicians": technicians},
             encoder=TechnicianEncoder,
         )
-    else:
+    elif request.method == "POST":
         content = json.loads(request.body)
         try:
             technician = Technician.objects.create(**content)
@@ -57,32 +57,38 @@ def api_delete_technician(request, pk):
 
 @require_http_methods(["GET", "POST"])
 def api_appointment(request):
-    if request.method =="GET":
-        appointment = Appointment.objects.all()
-
+    if request.method == "GET":
+        appointments = Appointment.objects.all()
         return JsonResponse(
-            {"appointments": appointment},
-            encoder=AppointmentEncoder
+            {"appointments": appointments},
+            AppointmentEncoder,
         )
     else:
         content = json.loads(request.body)
         try:
-            technician = Technician.objects.get(id=content["technician"])
-            content["technician"] = technician
-            status = Status.objects.get(id=content["status"])
-            content["status"] = status
-
-        except Appointment.DoesNotExist:
+            technicians = Technician.objects.first()
+            print(technicians)
+            content["technician"] = technicians
+        except Technician.DoesNotExist:
             return JsonResponse(
-                {"message": "Can not create appointment"},
-                status=400,
+                {"message": "Invalid employee_id"},
+                status=400
             )
-        appointment = Appointment.objects.create(**content)
+        try:
+            AutomobileVO.objects.get(vin=content["vin"])
+            content["vip"] = True
+        except AutomobileVO.DoesNotExist:
+            content["vip"] = False
+        appointments = Appointment.objects.create(**content)
         return JsonResponse(
-            appointment,
-            encoder=AppointmentEncoder,
-            safe=False
+            appointments,
+            AppointmentEncoder,
+            safe=False,
         )
+
+
+
+
 
 @require_http_methods(["DELETE"])
 def api_delete_appointment(request, pk):

@@ -5,7 +5,7 @@ function AppointmentHistoryList(props) {
     const [appointments, setAppointments] = useState([]);
 
     async function loadAppointments() {
-        const response = await fetch('http://localhost:8000/api/appointments/');
+        const response = await fetch('http://localhost:8080/api/appointments/');
         if(response.ok) {
             const data = await response.json();
             setAppointments(data.appointments);
