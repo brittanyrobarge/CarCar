@@ -1,18 +1,14 @@
 import React, {useState, useEffect} from 'react';
 
-
 function ManufacturerForm () {
   const [formData, setFormData] = useState({
     name: '',
   })
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const manufacturersUrl = 'http://localhost:8100/api/manufacturers/';
-
-
     const fetchConfig = {
       method: "post",
       body: JSON.stringify(formData),
@@ -30,7 +26,6 @@ function ManufacturerForm () {
     }
   }
 
-  
   const handleFormChange = (e) => {
     const value = e.target.value;
     const inputName = e.target.name;
@@ -39,7 +34,6 @@ function ManufacturerForm () {
       [inputName]: value
     });
   }
-
   return (
     <div className="row">
       <div className="offset-3 col-6">
@@ -57,5 +51,4 @@ function ManufacturerForm () {
     </div>
   );
 }
-
 export default ManufacturerForm;

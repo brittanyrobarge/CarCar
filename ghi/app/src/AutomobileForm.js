@@ -9,7 +9,6 @@ function AutomobileForm() {
     model_id: '',
   })
 
-
   const getModelData = async () => {
     const modelUrl = 'http://localhost:8100/api/models/';
     const response = await fetch(modelUrl);
@@ -24,10 +23,8 @@ function AutomobileForm() {
     getModelData();
   }, []);
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-
 
     const automobileUrl = 'http://localhost:8100/api/automobiles/';
 
@@ -57,7 +54,6 @@ function AutomobileForm() {
     if (inputName === 'model_id' && value !== '') {
         value = parseInt(value, 10);
       }
-
 
     setFormData({
       ...formData,

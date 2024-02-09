@@ -17,7 +17,6 @@ function SalespeopleList() {
     getData()
   }, [])
 
-
   return (
     <>
     <h1>Salespeople</h1>

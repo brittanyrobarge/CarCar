@@ -12,11 +12,9 @@ function ModelsList() {
       setModels(data.models)
     }
   }
-
   useEffect(()=>{
     getData()
   }, [])
-
 
   return (
     <>
@@ -51,4 +49,3 @@ function ModelsList() {
 }
 
 export default ModelsList;
-

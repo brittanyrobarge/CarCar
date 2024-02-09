@@ -5,7 +5,6 @@ function SalesHistory() {
   const [salespeople, setSalespeople] = useState([])
   const [filteredSales, setFilteredSales] = useState([])
 
-
   const getSalesData = async () => {
     const salesResponse = await fetch('http://localhost:8090/api/sales/');
 
@@ -15,7 +14,6 @@ function SalesHistory() {
     }
   }
 
-
   const getSalesPeopleData = async () => {
     const salespeopleResponse = await fetch('http://localhost:8090/api/salespeople/');
 
@@ -24,7 +22,6 @@ function SalesHistory() {
       setSalespeople(salespeopleData.salespeople)
     }
   }
-
 
   useEffect(()=>{
     getSalesData()

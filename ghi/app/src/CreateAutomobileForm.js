@@ -18,7 +18,6 @@ function AutomobileForm() {
         setModels(data.models)
       }
     }
-
     useEffect(() => {
       fetchData();
     }, []);

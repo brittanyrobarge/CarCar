@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-
 const initialData = {
   name: '',
   picture_url: '',
@@ -10,8 +9,6 @@ const initialData = {
 function ModelsForm() {
   const [manufacturers, setManufacturers] = useState([]);
   const [formData, setFormData] = useState(initialData);
-
-
 
   const fetchData = async () => {
     const url = 'http://localhost:8100/api/manufacturers/';
@@ -27,7 +24,6 @@ function ModelsForm() {
   useEffect(() => {
     fetchData();
   }, []);
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -50,7 +46,6 @@ function ModelsForm() {
     }
   };
 
-
   const handleFormChange = (e) => {
     let value = e.target.value;
     const inputName = e.target.name;
@@ -64,7 +59,6 @@ function ModelsForm() {
       [inputName]: value
     });
   }
-
   return (
     <div className="container">
       <div className="row">
