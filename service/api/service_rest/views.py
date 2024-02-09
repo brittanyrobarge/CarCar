@@ -88,8 +88,6 @@ def api_appointment(request):
 
 
 
-
-
 @require_http_methods(["DELETE"])
 def api_delete_appointment(request, pk):
     if request.method == "DELETE":

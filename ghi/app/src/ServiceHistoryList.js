@@ -1,67 +1,98 @@
+import React, { useState, useEffect } from "react";
 
-import React, { useState, useEffect } from 'react';
+const ServiceHistory = () => {
+	const [appointments, setAppointments] = useState([]);
+	const [filtered, setFiltered] = useState([]);
+	const [searchVin, setSearchVin] = useState("");
+	const [submitted, setSubmitted] = useState(false);
 
-function AppointmentHistoryList(props) {
-    const [appointments, setAppointments] = useState([]);
+	useEffect(() => {
+		const fetchAppointments = async () => {
+			const url = "http://localhost:8080/api/appointments/";
+			const response = await fetch(url);
 
-    async function loadAppointments() {
-        const response = await fetch('http://localhost:8080/api/appointments/');
-        if(response.ok) {
-            const data = await response.json();
-            setAppointments(data.appointments);
-            console.log(data.appointments)
-        } else {
-            console.error(response);
-        }
-    }
-    useEffect(() => {
-        loadAppointments();
-    }, []);
+			if (response.ok) {
+				const data = await response.json();
+				setAppointments(data.appointments);
+			}
+		};
+		fetchAppointments();
+	}, []);
 
-    return (
-        <>
-        <h1>Service History</h1>
-        <div className="input-group">
-            <div className="form-outline">
-                <input id="search-input" type="search" className="form-control" max_length={17} />
-                <label className="form-label" htmlFor="search-input">Search by VIN</label>
-            </div>
-            <button id="search-button" type="button" className="btn btn-primary">
-                <i className="fas fa-search"></i>
-            </button>
-        </div>
-        <table className="table table-striped">
-            <thead>
-                <tr>
-                    <th>Vin</th>
-                    <th>Is VIP?</th>
-                    <th>Customer</th>
-                    <th>Date / Time</th>
-                    <th>Technician</th>
-                    <th>Reason</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {appointments?.map(appointment => {
-                    return(
-                        <tr key={appointment.vin}>
-                            <td>{appointment.vin}</td>
-                            <td>{appointment.vip}</td>
-                            <td>{appointment.customer}</td>
-                            <td>{appointment.date_time}</td>
-                            <td>{appointment.technician.first_name}</td>
-                            <td>{appointment.reason}</td>
-                            <td>{appointment.status}</td>
-                        </tr>
-                    );
-                })}
-            </tbody>
-        </table>
-        </>
-    );
-}
+	const handleSearch = async (event) => {
+		const results = appointments.filter((appointment) =>
+			appointment.vin.includes(searchVin)
+		);
+		setFiltered(results);
+		setSubmitted(true);
+	};
 
+	return (
+		<React.Fragment>
+			<div className="px-4 py-5 my-1 mt-0 text-center">
+				<h1 className="display-5">Service Appointment History</h1>
+			</div>
+			<div className="row height d-flex justify-content-center align-items-center">
+				<div className="col-md-auto">
+					<div className="input-group mb-2">
+						<input
+							type="text"
+							value={searchVin}
+							onChange={(e) => setSearchVin(e.target.value)}
+						/>
+						<button
+							onClick={handleSearch}
+							type="button"
+							className="btn btn-outline-secondary">
+							Search VIN
+						</button>
+					</div>
+				</div>
+			</div>
+			{filtered.length > 0 && (
+				<table className="table table-striped">
+					<thead>
+						<tr>
+							<th>Customer</th>
+							<th>Vin</th>
+							<th>Date</th>
+							<th>Time</th>
+							<th>Technician</th>
+							<th>Reason</th>
+							<th>Finished</th>
+						</tr>
+					</thead>
+					<tbody>
+						{filtered.map((filter) => {
+							return (
+								<tr className="table-row" key={filter.id}>
+									<td>{filter.customer}</td>
+									<td>{filter.vin}</td>
+									<td>
+										{new Date(filter.date_time).toLocaleDateString("en-US")}
+									</td>
+									<td>
+										{new Date(filter.date_time).toLocaleTimeString([], {
+											hour: "2-digit",
+											minute: "2-digit",
+										})}
+									</td>
+									<td>{filter.technician.first_name}</td>
+									<td>{filter.reason}</td>
+									<td>{filter.finished ? "Yes" : "No"} </td>
+								</tr>
+							);
+						})}
+					</tbody>
+				</table>
+			)}
+			{submitted && filtered.length === 0 && (
+				<div className="alert alert-danger mb-0 p-4 mt-4" id="danger-message">
+					The VIN you entered has no appointment history.
+				</div>
+			)}
+		</React.Fragment>
+	);
+};
 
-
-export default AppointmentHistoryList
+export default ServiceHistory;
