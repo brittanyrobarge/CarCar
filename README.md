@@ -9,7 +9,8 @@ Team:
 ## Getting Started
 **Make sure you have Docker, Git, Insomnia, Django and Node.js 18.2 or above**
 1. Fork and Clone the repository- https://gitlab.com/brittanyrobarge26/project-beta.git
-2. Build and Run the project- the commands:
+2. Build and Run the project:
+    the commands:
 	docker volume create beta-data
 	docker-compose build
 	docker-compose up
