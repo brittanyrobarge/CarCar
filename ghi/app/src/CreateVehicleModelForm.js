@@ -16,11 +16,9 @@ function VehicleModelForm() {
         setManufacturers(data.manufacturers)
       }
     }
-
     useEffect(() => {
       fetchData();
     }, []);
-
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {};

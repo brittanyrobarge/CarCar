@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 
-
 function CustomerForm () {
   const [formData, setFormData] = useState({
     first_name: '',
@@ -9,12 +8,10 @@ function CustomerForm () {
     phone_number: '',
   })
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const url = `http://localhost:8090/api/customers/`;
-
 
     const fetchConfig = {
       method: "post",
@@ -36,16 +33,13 @@ function CustomerForm () {
     }
   }
 
-
   const handleFormChange = (e) => {
     const inputName = e.target.name;
     const value = e.target.value;
 
-    
     setFormData({
       ...formData,
 
-      
       [inputName]: value 
     });
   }

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 function ManufacturersList() {
   const [manufacturers, setManufacturers] = useState([])
-
   const getData = async () => {
     const response = await fetch('http://localhost:8100/api/manufacturers/');
 
@@ -12,12 +11,9 @@ function ManufacturersList() {
       setManufacturers(data.manufacturers)
     }
   }
-
   useEffect(()=>{
     getData()
   }, [])
-
-
   return (
     <>
     <h1>Manufacturers</h1>
@@ -45,6 +41,4 @@ function ManufacturersList() {
     </>
   );
 }
-
 export default ManufacturersList;
-

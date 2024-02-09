@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-
 function AutomobilesList() {
   const [automobiles, setAutomobiles] = useState([])
 
@@ -12,7 +11,6 @@ function AutomobilesList() {
       setAutomobiles(data.autos)
     }
   }
-
   function setSold (bool) {
     if (bool){
         return "Yes"
@@ -24,7 +22,6 @@ function AutomobilesList() {
   useEffect(()=>{
     getData()
   }, [])
-
 
   return (
     <>
@@ -60,4 +57,3 @@ function AutomobilesList() {
 }
 
 export default AutomobilesList;
-
