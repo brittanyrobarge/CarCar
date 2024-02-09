@@ -14,10 +14,12 @@ Team:
     the commands:
 
 	docker volume create beta-data
+
 	docker-compose build
+    
 	docker-compose up
 
-    
+
 -See Docker containers are running in the application
 -Go to http://localhost:3000/ to view
 
