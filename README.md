@@ -8,30 +8,6 @@ Team:
 
 ## Getting Started
 **Make sure you have Docker, Git, Insomnia, Django and Node.js 18.2 or above**
-1. Fork and Clone the repository- https://gitlab.com/brittanyrobarge26/project-beta.git
-2. Build and Run the project:
-
-    the commands:
-
-	docker volume create beta-data
-
-	docker-compose build
-
-	docker-compose up
-
-
--See Docker containers are running in the application
--Go to http://localhost:3000/ to view
-
-## Design
-CarCar is an application that can help businesses manage an automotive dealership. The application is built with three microservices which are inventory, sales, and services. These microservices work together to build the bones of the application by providing all of the required and necessary elements to allow the application to run smoothly. The inventory api has Manufacturer, Vehicle Model, and Automobile API endpoints.
-
-
-- **Inventory**
-- **Services**
-- **Sales**
-
-## How to Run this App
 1. Open the terminal
 2. type command cd to go to the directory where you will clone the project.
 3. Clone the projects repo by typing "git clone" with this url: https://gitlab.com/brittanyrobarge26/project-beta.git
@@ -45,17 +21,23 @@ CarCar is an application that can help businesses manage an automotive dealershi
 6. It may take a couple minutes for Docker to build, but while you are waiting you can go to localhost:3000 to see when the webpage loads.
 **It is good practice to also watch your Docker containers to make sure each one runs, so after Docker is running make sure to check the containers**
 
+## Design
+CarCar is an application that can help businesses manage an automotive dealership. The application is built with three microservices which are inventory, sales, and services. These microservices work together to build the bones of the application by providing all of the required and necessary elements to allow the application to run smoothly. The inventory api has Manufacturer, Vehicle Model, and Automobile API endpoints.
+
+CarCar is made up of 3 microservices which interact with one another.
+
+- **Inventory**
+- **Services**
+- **Sales**
+
 
 ## Integration
-Inventory holds records of automobiles that are available for sale.
-Service and Sales microservices use a poller to update the information from the inventory domain.
-
-
-# Diagram
-
-![Alt text](image-2.png)
+Our Inventory and Sales domains work together with our Service domain to make everything here at **CarCar** possible.
 
 How this all starts is at our inventory domain. We keep a record of automobiles on our lot that are available to buy. Our sales and service microservices obtain information from the inventory domain, using a **poller**, which talks to the inventory domain to keep track of which vehicles we have in our inventory so that the service and sales team always has up-to-date information.
+
+# Diagram
+![Alt text](image-2.png)
 
 ## Accessing Endpoints to Send and View Data: Access Through Insomnia & Your Browser
 
@@ -257,10 +239,9 @@ If we add "1222" to the request (eg. http://localhost:8080/api/servicehistory/12
 
 
 
-## Sales microservice
+## Inventory microservice
+How this all starts is at our inventory domain. We keep a record of automobiles on our lot that are available to buy. Our sales and service microservices obtain information from the inventory domain, using a **poller**, which talks to the inventory domain to keep track of which vehicles we have in our inventory so that the service and sales team always has up-to-date information.
 
-Explain your models and integration with the inventory
-microservice, here.
 ## Accessing Endpoints to Send and View Data: Access Through Insomnia & Your Browser
 
 ### Manufacturers:
